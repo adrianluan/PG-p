@@ -162,3 +162,41 @@ Requirement:
         }
 
 #end
+
+
+
+
+
+
+DFS
+// Class to covert a ternary expreesion to a Tree     
+    Node dfs(char[] expression, int start, int end){
+        Node node = new Node(expression[start]);
+        if(start == end){
+            return node;
+        }
+        int i = start, count = 0;
+        for(; i <= end; i++){
+            if(expression[i] == '?'){
+                count++;
+            }else if(expression[i] == ':'){
+                count--;
+                if(count == 0){
+                    break;
+                }
+            }
+        }   
+            node.left = dfs(expression, start + 2, i - 1);
+            node.right = dfs(expression, i + 1, end);
+            return node;        
+    }
+    
+	// Function to convert Ternary Expression to a Binary
+	// Tree. It return the root of tree
+	Node convertExpression(char[] expression)
+	{
+		return dfs(expression, 0, expression.length - 1);
+	}
+
+
+/* This code is contributed by Mr. Somesh Awasthi */
